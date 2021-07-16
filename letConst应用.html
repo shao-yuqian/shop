@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用</title>
+</head>
+<body>
+    <h2>Hello world</h2>
+    <h2>Hello world</h2>
+    <h2>Hello world</h2>
+    <script>
+        var hls = document.querySelectorAll('h2');
+        for(let i=0;i<hls.length;i++){
+            hls[i].onclick = function(){
+                hls[i].style.color = "red";
+            }
+        }
+        //1.代替闭包解决变量污染问题
+        var tmp = 123;
+        if(true){
+            var tmp = 'dfskja';
+            function foo(){
+                console.log(tmp);
+            }
+        }
+
+        (function(){
+            if(true){
+                var a = 4674;
+                function foo(a){
+                    console.log(a);
+                }
+            }
+        })()
+
+
+    </script>
+</body>
+</html>
