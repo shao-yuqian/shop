@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class属性格式</title>
+</head>
+<body>
+    <script>
+        let methodName = "getName";
+        class Person{
+            // 每一个类必须有构造器
+            constructor(name){
+                this.name = name;
+            };
+            // [变量名] 
+            [methodName](){
+                return this.name;
+            }
+        }
+        let per = new Person("zhangsan");
+        console.log(per);
+
+        let login = "hahahaha";
+        //[login]与login 与 "login"的区别
+        // [login] 是使用变量 赋值 hahahaha
+        // login 字符串类型 对象中的属性
+        // "login" 属性的赋值
+        let obj = {
+            [login]:"login",
+            login:"login"
+        }
+        console.log(obj);
+
+    </script>
+</body>
+</html>

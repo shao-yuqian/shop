@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        你能说一下一朵es6 中 class类的了解
+        super
+        1: constroter 
+        2 static 静态属性
+        3 extends 继承
+        4:super 
+          4.1 super() 触发父类构造器
+          4.2 super.xxx 获取父类中的方法
+          我们通常应用:在子类使用super.xx 调用父类中的方法
+     -->
+
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+                this.Say1();
+                Person.say()
+                this.say2()
+            };
+            //  1: tast 与 tast1 的区别
+            // tast 是类的静态属性
+            // tast1 是类的原型属性
+
+            //  2: say 与 Say1 函数的区别
+            // say 类的静态方法
+            // Say1 类的原型属性
+            static tast = '静态属性';
+            static say() {
+                console.log('静态方法say');
+                console.log(this, 'this为 Person 类');
+            }
+            tast1 = '属性';
+
+            // function 函数
+            Say1() {
+                console.log('Person 的原型属性');
+                console.log(this, 'this为 类创建的实例对象,与 构造器中 this 只想一致ri');
+                // 类的内部访问类的静态属性
+                console.log(Person.tast);
+            }
+
+            // 箭头函数
+            say2 = () => {
+                console.log('-------------分解线--------------');
+                // 注意这里的this
+                console.log(this, '实例对象');
+                // this.say(); // 报错
+                this.Say1()
+                console.log('---------------分界线-----------');
+            }
+
+        }
+
+        //  类的外部访问 类的静态属性
+        console.log(Person.tast);
+
+        class Child extends Person {
+            constructor(name, age) {
+                //  触发父类中的构造器
+                //  给父类的构造器传入实参
+                super(name, age);
+                this.a = '123'
+
+            }
+
+            static classMethod() {
+                console.log('==============分界线====================');
+                // 3: 在子类中。构造器外部，使用super.xxx 获取父类中的静态属性和静态方法
+                console.log(super.say());
+                console.log('==============分界线====================');
+
+            }
+        }
+
+        // 2:super 只能在 contructor 中使用
+        // console.log(super.tast);  
+        let a = new Child('aa', 12);
+        console.log(a);
+        // a.Say1()
+        Child.classMethod();
+    </script>
+ 
+ <!-- 
+     super
+     1: super() 在 子类 的构造器中执行super() 触发父类构造器
+     2：super.xx  在子类的静态方法中。获取父类的静态属性或者静态方法
+  -->
+</body>
+
+</html>

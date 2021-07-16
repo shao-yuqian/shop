@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继承</title>
+</head>
+<body>
+    <script>
+        class Yexurui{
+            constructor(){
+                this.a = "123";
+            };
+            toSay(){
+                console.log("yesurui 的方法");
+            }
+            // # 表示私有属性,x时属性
+            #x = 123;
+            // public protect private
+
+            // 静态方法 static
+            static init(){
+                console.log("静态方法");
+                // this指的是类，而不是实例
+                console.log(this);
+            }
+        }
+        console.log(Yexurui.init());  //是 类的静态方法
+        console.log(Yexurui.toSay); //undefined 是原型对象上的方法
+        //extends 作用 继承
+        // long子类，Yexurui父类
+        // 子类与父类本身是独立的，执行时互不干扰
+        // 子类中属性，自己的属性加父类可继承的属性
+        class long extends Yexurui{
+            constructor(){   
+                //触发父类中的构造器             
+                super();
+                this.b = "zhanglongbo";
+            }
+        }
+        let obj = new long();
+        let a = new Yexurui();
+        console.log(a);
+        console.log(obj);
+        a.toSay();        
+        obj.toSay();
+    </script>
+</body>
+</html>

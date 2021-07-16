@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+</head>
+<body>
+    <script>
+        // function Person(){
+        //     this.name = name;
+        //     thsi.age = age;
+        // }
+        // Person.prototype.fun = function(){
+        //     console.log("hahaha");
+        // }
+        // let person = new Person("zhangsan",22);
+        //class 关键字：声明一个类
+        // Person：类名，可以执行
+        // 作用：可以类 实例化对象
+        class Person{
+            // 构造器。在执行Person类时候触发
+            // name ，age形参，作用：接收执行person类时传入的实参
+            constructor(name,age){
+                // 构造器中的this 为 new 实例的对象
+                this.name = name;
+                this.age = age;
+            }
+            // bug 不能写 let var关键字
+            // a = 123;
+
+            //给 Person 类 添加原型方法
+            fun(){
+                console.log("hahahahaha");
+            }
+        }
+        let person = new Person("zhangsan",22);
+        console.log(person);  
+        // 2.Person 是函数
+        console.log(typeof Person); //function
+        console.log(Person === person.constructor); //true
+        console.log(Person === Person.prototype.constructor); //true
+
+
+    </script>
+</body>
+</html>
