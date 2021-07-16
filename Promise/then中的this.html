@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function promise() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            })
+        }
+        promise().then(res => {
+            console.log(this);//指向window
+            return 1;
+        }).then(res => {
+
+            console.log(res);
+        })
+
+
+        //如果onFulfilled 不是一个函数，并且promise1变为已拒绝，那么promise2必须执行已完成
+        // 1.then的参一不是函数情况 参数二是函数
+        // 2.执行的是reject
+        // ------> 结果promise2执行的是参数一函数
+
+        var promise1 = new Promise((resolve,
+            reject) => { reject(); });
+        const promise2 = promise1
+            .then(null, function () {
+                return 123
+            });
+        promise2
+            .then(
+                () => {
+                    console.log('promise2 已完成');
+                },
+                () => {
+                    console.log('promise2 已拒绝');
+                });
+    </script>
+</body>
+
+</html>

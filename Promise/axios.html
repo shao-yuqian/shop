@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios 封装</title>
+</head>
+
+<body>
+    <script>
+        function axios(options) {
+            // let url = options.url;
+            // let method = options.method;
+            // let data =options.data;
+            //解构赋值；适合当变量名字与对象下的属性名字一样的时候
+            // 声明三个变量，并分别赋值，赋值为options对象的属性的值
+            let { url, method, data } = options;
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                let u = url;
+                if (JSON.stringify(data).length == 2) {
+                    // 无参数
+                    u = url;
+                } else {
+                    // 有参数
+                    u = url + "?";
+                    for (let k in data) {
+                        u = u + k + "=" + data[k] + '&';
+                    }
+                    u = u.slice(0, u.length - 1);
+                }
+                xhr.open(method, `http://49.232.47.192:9527/api${u}`)
+                xhr.send();
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        var res = xhr.responseText;
+                        resolve(JSON.parse(res));
+                    }
+                }
+            })
+        }
+        axios({
+            url: '/goodList?page=1',
+            method: 'GET',
+            data: {}
+        }).then(data => {
+            console.log("服务器响应的数据\n", data);
+        })
+    </script>
+    <script>
+        // function ajax(url, obj, fn) {
+
+        //     var xhr = new XMLHttpRequest()
+        //     var u;
+        //     if (JSON.stringify(obj).length == 2) {
+        //         // 无参数
+        //         u = url
+
+        //     } else {
+        //         // 有参数
+        //         u = url + "?";
+        //         for (var k in obj) {
+        //             u = u + k + "=" + obj[k] + '&'
+        //         }
+        //         u = u.slice(0, u.length - 1)
+
+        //     }
+        //     xhr.open('get', `http://49.232.47.192:9527/api${u}`)
+        //     xhr.send()
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.status == 200 & xhr.readyState == 4) {
+        //             var res = xhr.responseText
+        //             res = JSON.parse(res)
+        //             fn(res)
+        //         }
+        //     }
+
+        // }
+
+    </script>
+</body>
+
+</html>

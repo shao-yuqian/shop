@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>并发业务</title>
+</head>
+
+<body>
+    <button>点击渲染我爱你中国</button>
+    <h1></h1>
+    <script>
+        let btn = document.querySelector('button');
+        let text = document.querySelector("h1");
+
+        // 我爱你中国
+        // 我 /a
+        // 爱你 /b
+        // 中 /c
+
+
+        let tast = [ajaxA(),ajaxB(),ajaxC()];
+        // btn.onclick =function(){}  // 事件覆盖 只能改btn添加一次点击事件,没有兼容问题
+        btn.addEventListener('click',function (params) {//多次添加 不兼容ie
+            let task = [ajaxA(),ajaxB(),ajaxC()];
+            // fagh
+            let taster = '';
+            Promise.all(task).then(res=>{
+                console.log(res);
+                res.forEach(function(item){
+                    item = JSON.parse(item);
+                    taster = taster + item.msg;                    
+                    text.innerHTML = taster;
+                })
+                console.log(taster);
+            })
+        })
+
+        function  ajaxA() {
+            return ajax("/a");            
+        }
+        
+        function  ajaxB() {
+            return ajax("/b");            
+        }
+        
+        function  ajaxC() {
+            return ajax("/c");            
+        }
+        
+        function ajax(url){
+            return new Promise((resolve,reject)=>{
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET',`http://192.168.1.149:3000${url}`);
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState != 4){
+                        return
+                    }
+                    if(xhr.status===200){
+                        resolve(xhr.responseText);
+                    }else{
+                        reject(`error ${xhr}`);
+                    }
+                }
+                xhr.send();
+            })
+        }
+
+        
+
+
+    </script>
+</body>
+
+</html>

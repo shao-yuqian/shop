@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Then</title>
+</head>
+
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            console.log('promise 同步执行了');
+            if (true) {
+                resolve('success');
+            }
+        })
+        // res是then执行的时候 返回的新的promise对象
+        let res = p.then((data) => {
+            console.log('then data', data);
+            //return 返回的值，返回到了res.then()的回调函数的形参中
+            return '一giao我里giao';
+        });
+        console.log("res", res);
+        console.log('p', p);
+        //p 和res不是同一个promise对象
+
+        let res1 = res.then(data => {
+            console.log('res then data ', data);
+            return "13245";
+        })
+        res1.then(data => {
+            console.log('then then', data);
+        })
+
+        // 1.then执行时返回一个新的promise
+        // ------>触发下一个then，可以形成then的链式调用
+        // 2.then中的回调函数怎么执行
+        // ------> 第一种:new Promise中的resolve() 触发的，一个resolve可以触发一串then
+        // ------> 第二种:then 返回的promise 继续.then触发的
+        // 3.then中回调函数形参接收的值是什么
+        // -------> 1:resolve() 的实参
+        // -------> 2.上一个then的return值 
+        // 4.then 中return返回值的问题
+        // -------> return值 作为下一个then中回调函数的实参
+
+        //难点:1: then中return的去向
+        //难点:2: then 中回调函数形参的来源
+
+
+
+    </script>
+</body>
+
+</html>

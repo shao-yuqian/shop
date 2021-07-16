@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复习promise </title>
+</head>
+
+<body>
+    <!-- 
+             1 异步编程
+                代码执行速度慢
+                异步编程原理：异步消息队列 微任务 宏任务
+                常见的异步程序:
+                setTimeOut  setInterval  promise.then promise.catch async awiat  ajax
+
+             2：为什么有promise
+                为了解决 回调地狱代码可读性差，异步间嵌套，代码维护困难，因此有了优雅写法的promi
+               
+
+             3: promise 的3中状态
+                pending 未完成，进行中
+                resolve 已完成，成功
+                reject 已拒绝，失败
+             4： promise 那些是同步程序 那些是异步程序
+                同步：new Promise()的回调中的代码
+                异步：.then, .catch的回调
+             5： promise.then  
+
+             6: promise.catch
+                捕获then 上的任意一个错误🌹
+     -->
+    <script>
+        //  function   ajaxAsync(cd) {
+        //      setTimeout(()=>{
+        //          cd()
+        //      },2000)
+        //  }
+
+        //  ajaxAsync(function () {
+        //      console.log('这里是异步执行代码');😂🙌👍😁🤞😎😢
+        // })
+
+        // // 当一个异步任务执行结束后；继续执行其他的异步任务
+
+        // // 异步层次嵌套过多，代码的维护起来会特别困难
+
+        // setTimeout(function (params) {
+        //     console.log('第一个异步任务');
+        //     setTimeout(function (params) {
+        //         console.log('第二个异步任务');
+        //     },2000)
+
+        // },1000)
+
+        function promise1() {
+            console.log('这里执行结束，执行new ，然后执行回调函数');
+            return new Promise(function (resolve, reject) {
+                console.log('new Promise 的回调函数中代码同步执行');
+                //这里是同步代码中 构建了异步程序
+                setTimeout(() => {
+                    console.log('异步代码开始执行了，1s后完成输出结果');
+                    // 输出完成后，意味着promise状态由未完成到已完成，调用resolve函数
+                    //将皮肉，promise实例的状态标记为已完成（成功），当前promise串行执行
+                    resolve('success1');
+                }, 1000);
+            })
+        }
+
+        function promise2() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                    console.log("2s 后输出结果");
+                    resolve("second success2");
+                }, 2000);
+            })
+        }
+        let p = promise1();
+        console.log(p);
+
+        let p2 = promise2();
+        let p3 = p2.then();
+        let p4 = p3.then();
+        //4个promise，2个任务
+        // 将上面两个promise串起来
+        promise1().then((res) => {
+            console.log('第一个任务❤', res);
+            return promise2();
+        }).then(res => {
+            console.log('第二个任务👀', res);
+        })
+
+        //then 的形参 接收的值:
+        //1.看then 处理的是哪一个promise 的状态
+        // 如果是new Promise 那么 resolve 实参
+        // 如果是 .then .then 串联调用
+        // 看上一个then 的 return
+        // 如果是return new promise 那么就是其中 resolve 实参
+        // 如果不是或者没有return，那么就是上一个then的return值或者undefined
+
+    </script>
+</body>
+
+</html>

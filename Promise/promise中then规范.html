@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>then的规范</title>
+</head>
+<body>
+    <script>
+        let promise1 = new Promise((resolve,reject)=>{
+            resolve();
+        })
+        //1.不论是promise的then中参一还是参二 有返回值;
+        //下一个then 都会执行函数一
+        let promise2 = promise1.then((data)=>{return 123},res=>{});
+        promise2.then((data)=>{
+            console.log(data);
+        })
+
+        
+        // let promise1 = new Promise((resolve,reject)=>{
+        //     resolve("wangfeng");
+        // })
+        // // 1.promise1.then 参一不是函数
+        // // 2.promise执行resolve 并且传入实参
+        // // 要求promise2 必须执行then的参一函数,res赋值为resolve实参
+        // let promise2 = promise1.then(123,res=>{ });
+        // promise2.then((res)=>{
+        //     console.log(res);
+        // })
+
+
+        // let promise1 = new Promise((resolve,reject)=>{
+        //     reject("wangfeng err");
+        // })
+        // // 1.promise.then 参二不是函数
+        // // 2.promise执行已拒绝reject传入实参
+        // // 结论:promise2.then必须执行,并且参二,形参为reject实参
+        // let promise2 = promise1.then(()=>{},undefined);
+        // promise2.then((res)=>{
+        //     console.log("promise 已完成");
+        // },(err)=>{
+        //     console.log("promise2 已拒绝",err);
+        // })
+
+    </script>
+</body>
+</html>

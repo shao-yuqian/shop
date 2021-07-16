@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+
+<body>
+    <script>
+
+        //promise 解决什么问题
+        //解决回调函数层层嵌套，回调地狱
+
+        // function foo(callback) {         //函数1
+        //     console.log('1111');
+        //     callback(function (callback) {    //函数2
+        //         console.log('2222');
+        //         callback('Hello');
+        //     })
+        // }
+
+        // foo(function (call) {             //函数3
+        //     console.log('3333');
+        //     call(function (a) {           //函数4
+        //         console.log('4444');
+        //         console.log(a);
+        //     })
+        // })
+
+        // function ajax(option = { url: "/", method: "get " }, callbaci) {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open(option.method.open.url);
+        //     xhr.send();
+        //     xhr.onreadystatechange = function (params) {
+        //         if (xhr.readyState == 4) {
+        //             callbaci(xhr.responseText);
+        //         }
+        //     }
+        // }
+        // ajax({ url: "/", method: 'get' }, function (data) {
+        //     data = JSON.parse(data);
+        //     reder(data);
+        // })
+        // function render(data) {
+        //     console.log('根据数据dom ', data);
+        // }
+
+        /*
+        1.promise 哪里的程序是 执行慢的程序
+        2.promise 哪里的程序是正常程序
+        */
+
+        // 1.怎么创建promise实例
+        // Promise() 作用：创建promise实例的
+        let p = new Promise((resolve, reject) => {
+            console.log("new Promise");
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", 'http://49.232.47.192:9527/api/goodList?page=1');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    resolve(xhr.responseText);
+                }
+            } 
+        })
+        console.log(p);
+        //2.怎么使用promise 代替上面的程序
+        p.then((data) => {
+            console.log('data then', data);
+        })
+        console.log('验证promise中执行慢的程序');
+
+
+
+    </script>
+</body>
+
+</html>

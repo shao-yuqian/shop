@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>catch</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve,rejet)=>{
+            setTimeout(() => {
+                resolve({
+                    code:200,
+                    msg:'网络请求成功'
+                })
+            }, 1000);
+        })
+        p.then(res=>{
+            console.log(res);
+            return JSON.stringify(res);
+        }).then(res=>{
+            console.log(res);
+            //注意：只要有bug 后面的then就不会执行 ，直接执行catch
+            // console.log(fdads);
+            return "jkhfg"+res
+        }).then(res=>{
+            console.log(res);
+        }).catch(err=>{
+            //catch 捕获错误
+            // 1.在整个promise任务链上，任何一个阶段出现错误都会执行catch
+            console.log(err);
+        })
+    </script>
+</body>
+</html>

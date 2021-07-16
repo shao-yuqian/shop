@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //我们可以将任意的回调函数代码 封装为promise
+
+        // // 原函数
+        // function dynamicFunc(cb) {
+        //     setTimeout(function () {
+        //         console.log('1s 后显示');
+        //         cb();
+        //     }, 1000);
+        // }
+        // var callback = function () {
+        //     console.log('在异步结束后 log');
+        // }
+        // // ⽤传⼊回调函数的⽅式执⾏
+        // dynamicFunc(callback);
+
+        function dynamicFunc(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(() => {
+                    console.log('1s 后显示');
+                    resolve();
+                }, 1000);
+            })
+        }
+        var callback = function () {
+            console.log('在异步结束后 log');
+        }
+        dynamicFunc().then(callback);
+
+
+    </script>
+</body>
+
+</html>

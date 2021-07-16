@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    <script>
+        //promise 对象有三种状态
+        // pending 未完成，待办状态
+        // resolve 成功完成 
+        // reject  失败状态
+        let count = true;
+        let p = new Promise((resolve,reject)=>{
+            // 这里代码为未完成状态
+            console.log('pending 开始了');
+            if(count){
+                // resolve() 函数执行了表示状态变为成功状态
+                // resolve() 执行的就是then的回调函数
+                resolve('success');
+            }else{
+                // reject() 函数执行了表示状态变为失败状态
+                // reject() 执行的是then的第二个回调函数(一般不用)或者是catch的回调函数
+                reject('error');
+            }
+        })
+        p.then((data)=>{
+            // 执行慢的程序
+            console.log('then data success ',data);
+            
+        }).catch(err=>{
+            console.log('catch err error ',err);
+        })
+        console.log('验证那些是执行慢的程序');
+        // 同步：new  Promise() 的回调函数是同步的程序
+        // 异步；then 的回调函数 中为异步
+
+        /*
+        1.三种状态
+        2.哪些是同步，哪些是异步的
+        3.resolve reject分别执行的是什么行为
+        */
+    </script>
+</body>
+</html>

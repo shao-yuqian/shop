@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+</body>
+<script>
+    // 第一个
+    // function f1(fn) {
+    //     setTimeout(fn, 1000);
+    // }
+    // function fn() {
+    //     console.log(1);
+    // }
+    // f1(fn);
+    // function f1() {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve();
+    //         }, 1000);
+    //     })
+    // }
+    // function fn() {
+    //     console.log(1);
+    // }
+    // // f1().then(p);
+    // (async function(){
+    //     let res = await f1(); 
+    //     let res = await fn();       
+    // })()
+
+    //-----------------------------------
+    // 第二个 先搞个div标签兄弟们
+    // var div = document.querySelector(".box");
+    // function click() {
+    //     div.onclick = function () {
+    //         console.log("div");
+    //     };
+    // }
+    // // function f1() {
+    // //     click();
+    // // }
+    // // f1();
+    // function f1(){
+    //     return new Promise((resolve,reject)=>{
+    //         resolve();
+    //     })
+    // }
+    // // f1().then(p);
+    // (async function(){
+    //     let res = await f1(); 
+    //     let res1 = await click();       
+    // })()
+    
+   
+
+    //----------------------------
+    // 第三个
+    // setTimeout(() => {
+    //     console.log("第一次输出");
+    //     setTimeout(() => {
+    //         console.log("第二次输出");
+    //         setTimeout(() => {
+    //             console.log("第三次输出");
+    //         }, 2000);
+    //     }, 1000);
+    // }, 3000);
+    // function promise1(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve("第一次输出");
+    //         }, 1000);
+    //     })
+    // }
+    // function promise2(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve("第二次输出");
+    //         }, 2000);
+    //     })
+    // }
+    // function promise3(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve("第三次输出");
+    //         }, 3000);
+    //     })
+    // }
+    // (async function(){
+    //     let p1 = await promise1();
+    //     console.log(p1);
+    //     let p2 = await promise2();
+    //     console.log(p2);
+    //     let p3 = await promise3();
+    //     console.log(p3);
+    // })()
+    // promise1().then(promise2().then(promise3()));
+    //-------------------------------------------------
+    // function A(callback) {
+    //     callback();
+    //     console.log('我是主函数');
+    // }
+    // function B() {
+    //     setTimeout("console.log('我是回调函数')", 3000);
+    // }
+    // // // // A(B);
+    // function A(){
+    //     return new Promise((resolve,reject)=>{
+    //         console.log("我是主函数");
+    //         resolve();
+    //     })
+    // }
+    
+    // // A().then(p);
+    // (async function(){
+    //     await A();        
+    //     await B();        
+    // })()
+
+
+    /* ---------------------------------------------------------------------------------- */
+
+    // function fn(callback) {
+    //     setTimeout(() => {
+    //         let data = '数据'
+    //         callback(data)
+    //     }, 1000)
+    // }
+    // fn((data) => {
+    //     console.log(data);
+    // })
+
+    // function fn(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {                                
+    //             resolve();
+    //         }, 1000);
+    //     })
+    // }
+    // function dat(data){
+    //     console.log(data);
+    // }
+    
+    // // fn().then(res=>{
+    // //     console.log(res);
+    // // })
+    // (async function(){
+    //     await fn();        
+    //     await dat("数据");        
+    // })()
+
+    /* ------------------------------------------------------------------------------------- */
+
+
+    // setTimeout(() => {
+    //     console.log('timeout callback()')
+    // }, 0)
+    // console.log('setTimeout()之后')
+
+    function promise4(){
+        return  new Promise((resolve,reject)=>{
+            console.log('setTimeout()之后')
+            setTimeout(() => {
+                resolve("timeout callback()");
+            }, 0);
+        })
+    }
+    (async function(){
+       let res = await promise4();        
+       console.log(res);       
+    })()
+    // promise4().then(res=>{
+    //     console.log(res);
+    // })
+
+
+    /* -------------------------------------------------------------------------------------- */
+
+
+    // var fs = require('fs');
+    // fs.readFile('./data/a.txt', 'utf8', function (err, data) {
+    //     if (err) {
+    //         throw err
+    //     } else {
+    //         console.log(data);
+    //         fs.readFile('./data/b.txt', 'utf8', function (err, data) {
+    //             if (err) {
+    //                 throw err
+    //             } else {
+    //                 console.log(data);
+    //                 fs.readFile('./data/c.txt', 'utf8', function (err, data) {
+    //                     if (err) {
+    //                         throw err
+    //                     } else {
+    //                         console.log(data);
+    //                     }
+    //                 })
+    //             }
+    //         })
+    //     }
+    // })
+
+    // throw 语句抛出一个错误。
+    // 当错误发生时， JavaScript 会停止执行并抛出错误信息。
+    // 描述这种情况的技术术语是：JavaScript 将抛出一个错误。
+    // throw 语句创建自定义错误。
+    // 技术术语是： 抛出异常。
+    // 异常可以是 JavaScript 字符串、数字、逻辑值或对象：
+
+
+    /* ------------------------------------------------------------------------------------------ */
+
+
+    // function callback(param) {
+    //     console.log('I am callback! param: ', param)
+    // }
+    // // function myFunc(param, callback) {
+    // //     setTimeout(() => {
+    // //         callback(param)
+    // //     }, 2000)
+    // // }
+    // // myFunc(1, callback);
+
+    // function myFunc(param){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve(callback(1));
+    //         }, 2000);
+    //     })
+    // }
+    // myFunc().then();
+
+
+
+
+
+
+    /* ---------------------------------------------------------------------------------------- */
+
+
+    // setTimeout(function () {
+    //     console.log('武林要以和为贵');
+    //     setTimeout(function () {
+    //         console.log('要讲武德');
+    //         setTimeout(function () {
+    //             console.log('不要搞窝里斗');
+    //         }, 1000)
+    //     }, 2000)
+    // }, 3000)
+
+    // function p1(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve("武林要以和为贵");                
+    //         }, 3000);
+    //     })
+    // }
+    // function p2(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve("要讲武德");               
+    //         }, 2000);
+    //     })
+    // }
+    // function p3(){
+    //     return new Promise((resolve,reject)=>{
+    //         setTimeout(() => {
+    //             resolve("不要搞窝里斗");               
+    //         }, 1000);
+    //     })
+    // }
+    // p1().then(res=>{
+    //     console.log(res);
+    //     return p2();
+    // }).then(res=>{
+    //     console.log(res);
+    //     return p3();
+    // }).then(res=>{
+    //     console.log(res);
+    // })
+
+
+
+    /* -------------------------------------------------------------------------------------- */
+
+    // 最后一个 搞个div
+    // function f() {
+    //     console.log("第一次输出我");
+    //     setTimeout(() => {
+    //         console.log("3s 输出");
+    //         document.querySelector("div").onclick = function () {
+    //             console.log("点击再输出");
+    //         };
+    //     }, 3000);
+    // }
+    // f();
+    // function f(){
+    //     return Promise((resolve,reject)=>{
+    //         console.log("第一次输出我");
+    //         setTimeout(() => {
+                
+    //         }, 3000);
+    //     })
+    // }
+
+
+
+</script>
+
+</html>
