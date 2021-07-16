@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异步</title>
+</head>
+<body>
+    <script>
+        //程序执行分为
+        //同步程序：执行快的为同步程序
+        //异步程序：执行慢的为异步程序，也叫非阻塞程序，解决执行慢的代码
+        //为了防止代码有阻塞现象，导致程序卡死，所以将执行慢的程序作为异步程序，非阻塞程序
+        
+        //什么是异步程序
+        //异步程序为非阻塞程序。
+        //因为js是单线程程序，浏览器底层，浏览器中开创一个进程。完成异步程序
+
+
+
+        // 常见的异步程序：
+        // setTimeout setInterval 
+        // 事件处理函数 
+        // 网络请求，=
+        // promise
+        // async await
+
+        
+        //深入理解异步:
+        //异步消息队列：微任务 宏任务 
+        // event Lop
+        let a = 123;
+        let b = 456;
+        setTimeout(() => {
+            b = 879;
+        }, 100);
+        console.log(b);
+    </script>
+</body>
+</html>

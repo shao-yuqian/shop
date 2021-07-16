@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象扩展api</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name:'aaa',
+            age:'123'
+        }
+        //返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名。
+        let arr = Object.keys(obj);
+        console.log(arr);
+        //返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名
+        let arr1 = Object.getOwnPropertyNames(obj);
+        console.log(arr1);
+        //
+        let arr2 = Object.getOwnPropertySymbols(obj);
+        console.log(arr2);
+    </script>
+</body>
+</html>

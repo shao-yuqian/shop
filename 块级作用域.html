@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>块级作用域</title>
+</head>
+
+<body>
+    <script>
+        // var a;
+        // if (a) {
+        //     var b = 123;
+        // }
+        // for (var i = 0; i < 12; i++) {
+        //     var data = 123;
+        // }
+        // function foo() {
+        //     var bar = 123;
+        // }
+
+    </script>
+    <script>
+
+        //1.let const 声明的变量会形成块级作用域
+
+        // 什么是块级作用域
+        // 块级作用域:let const 声明的变量,在哪里(块级作用域)能够访问
+
+        // 如何查找块级作用域
+        //1.看声明变量的方式:是不是let const
+        //2.找包裹该变量的代码块 {} 
+        //3.特殊的:for if else 
+        let a = 123;
+        {
+            //let 声明的变量形成了块级作用域
+            let a = 46;
+            console.log(a);
+        }
+        console.log(a);
+
+        if (true) {
+            let b = 464;
+            console.log(b);
+        }
+        //为什么报错
+        // console.log(b);
+
+
+        //2.特殊的for循环
+        // (function(params){
+
+        // })(params);
+        for (var i = 0; i < 3; i++) {
+            setTimeout(() => {
+                console.log(i); //3 3 3 
+            }, 16.7);
+        }
+
+        for (var k = 0; k < 3; k++) {
+            (function (k) {
+                console.log(k);//0 1 2
+            })(k);
+        }
+
+        //特殊的
+        //for 中 let i 在执行的时候,会形成多个块级作用域
+        //每个块,彼此独立,每个中的 i 都有初始值
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                console.log(i); //0 1 2
+            }, 16.7);
+        }
+
+        //只声明了一个i变量
+        //为什么输出结果是 012,不是333
+        //因为for循环执行多次,i会产生多个块级作用域,每个之间彼此独立,都有初始值
+        //所以:setTimeOut 执行的时候,访问的是 自己块中的赋值. 012
+
+
+        //
+    </script>
+</body>
+
+</html>

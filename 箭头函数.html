@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数</title>
+</head>
+<body>
+    <script>
+        //箭头函数来代替匿名函数
+        let foo = function(a,b){
+            return 123;
+        }
+        let foo1 = (a,b)=>{
+            return 123;
+        }
+        // 2.箭头函数的简写，a形参 返回值123
+        let foo2 = a=>123;
+        let foo3 = (a,b)=>"12334";
+        //箭头函数中的this,没有this
+        // 使用this如何判断？
+        // 1.看函数写在哪里,this 就是该上下文中的this
+        // 2.
+        let foo4 = ()=>{
+            console.log(this);
+        }
+        let obj = {foo:foo4};
+        obj.foo();
+
+        // 4.箭头函数中没有arguments属性,但可以使用rest参数代替
+        let foo5 = (...rest)=>{//...rest 参数 ...变量名字 写在行形参的位置 为rest参数
+            console.log(rest);
+            // console.log(arguments);
+        }
+        let foo6 = function(){
+            console.log(arguments);
+        }       
+        foo6(98,76,8); 
+        foo5(13,45,3,4);
+
+        // 形参设置默认值
+        //如果函数执行没有参数，使用形参默认值，如果有那么使用传入的实参
+        function ba1(a=1,b,c={url:'123'}){
+            console.log(a,b,c);
+        }
+        ba1();
+        /*
+            1:箭头函数代替匿名函数
+            2:箭头函数中没有this
+            3:箭头函数中没有arguments 可以用rest参数代替
+            4:函数形参可以设置默认值
+        */
+
+    </script>
+</body>
+</html>

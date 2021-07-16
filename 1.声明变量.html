@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 声明变量</title>
+</head>
+
+<body>
+    <script>
+        // ES5 var function     可以变量提升
+        // ES6 let const        没有变量提升
+        // import class         模块化开发，类
+        //函数中的变量是局部,其他var的变量是全局变量
+        // var a;
+        // if (a) {
+        //     var b = 123;
+        // }
+        // for (var i = 0; i < 12; i++) {
+        //     var data = 123;
+        // }
+        // function foo() {
+        //     var bar = 123;
+        // }
+        // 全局变量：a,i,b,data,foo
+        // 局部变量：bar
+        // 使用变量的规则:
+
+        //1.由let,const声明的变量在同一个作用域中不能存在重复声明（可以为任意六种声明方式之一）
+        // var c = 123;
+        // let c = 123;
+        // const c = 123;
+
+        //2.Es6 中let const 声明的变量没有变量提升,变量不声明不能使用
+        // console.log(a);
+        // let a = "123";
+        //     a = 456;
+
+        //3.const 声明的常量不能被修改，let 为变量
+        //error:Assignment to constant variable.
+        // const c = 123;
+        // c = 879;
+
+        //4.注意:当const赋值为引用类型数据，可以修改引用类型数据
+        //不是说const 声明的是常量，不能被重新赋值，为什么对象或者数组可以被修改呢
+        //当const赋值为引用类型数据的时候，保证的const变量保存的地址不变，不能保证地址中存放数据是否发生变化
+        const obj = {a:1345};
+        obj.a = 'hagf';
+        console.log(obj);
+        // obj = {} 修改了obj 常量的指针
+
+        
+        // const arr = [13,45,4,5];
+        // arr[0] = 45;
+        // console.log(arr);
+
+        //5.在Es6中 typeof并不是百分百准确的
+        // 方式一：理解暂时性死区
+        //6.在同一个作用域中，在声明变量之前使用变量，该区域为暂时性死区
+        // 注意:1.不是一个特定区域，指的是在当前作用域下声明的变量，在该作用域中哪里不能使用
+        //      2.根据变量的声明范围与使用范围确定的区域
+        //      3.在暂时性死区中typeof不会百分百准确
+        // 方式二:
+        // 怎么找暂时性死区
+        //  1.找let const
+        //  2.找let const 变量的作用域
+        //  3.在当前作用域中，声明之前，不能用let const变量定位，区域为暂时性死区
+        // 暂时性死区特点
+        // 1.使用变量报错
+        // 2.typeof不能百分百正确
+
+        typeof x;
+        // let x;
+
+        //7.let 在全局中声明的变量不是顶层对象,不能赋值给window
+        
+
+    </script>
+</body>
+
+</html>

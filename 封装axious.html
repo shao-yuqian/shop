@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装</title>
+</head>
+
+<body>
+    <script>
+        function Axios(options) {
+            let { url, method, params } = options;
+            if (method === 'get') {
+                url = url + '?'
+                for (let k in params) {
+                    url = url + k + '=' + params[k] + '&'
+                }
+                url = Axios.prototype.baseURL + url.slice(0, url.length - 1);
+            }
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState != 4) {
+                        return;
+                    }
+                    if (xhr.status === 200) {
+                        resolve(xhr.responseText);
+                    } else {
+                        reject(xhr);
+                    }
+                }
+                xhr.send();
+            })
+        }
+        Axios.prototype.baseURL = 'http://49.232.47.192:9527/api'
+
+        Axios.prototype.get = function (url, params) {
+            let request = new Axios({
+                url: url,
+                method:'get',
+                params,
+            })
+            return request;
+        } 
+
+        // 应用
+        // Axios.prototype.get('/goodList', {
+        //     page: 1,
+        // }).then(res=>{
+        //     let data = JSON.parse(res);
+        //     console.log(data);
+        // })
+        Axios({
+            url:'/goodList',
+            method:"get",
+            params:{page:1}
+        }).then(res=>{
+            let data = JSON.parse(res);
+            console.log(data);
+        })
+
+    </script>
+</body>
+
+</html>

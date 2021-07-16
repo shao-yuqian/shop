@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象扩展</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name:"user",
+            age:18
+        }
+        let cobj = {
+            size:"xxl"
+        }
+        for(let k in obj){
+            cobj[k] = obj[k];
+        }
+        console.log(cobj);
+
+
+        //展开运算符
+        //...{},可以展开对象中所有的key:value键值对
+        let cObj = {
+            size:"xl",  
+            hobby:"sing",          
+            ...obj
+        }
+        console.log(cObj);
+
+        //2.如果展开的是对象，只能将...obj放在对象中，不能放在数组中
+        //bug:obj is not iterable
+        // let arr = [...obj];
+
+        //注意:存在展开运算符的对象，可以继续展开
+        let obj1 = {...cObj};
+        console.log(obj1);
+
+        //注意：展开对象中，属性有重复，相当于对属性重新赋值，以最后一次运算为主
+        let obj2 = {...cObj,...obj}
+        console.log(obj2);
+
+        //展开运算符可以展开数组
+        let arr = [1,5,45,1,55]
+        let arr1 = [...arr]
+        console.log(arr1);
+
+        console.clear();
+        //属性简写
+        let userID = 'syq';
+        let password = "465451";
+        //1.对象中熟悉感，使用变量的赋值
+        //2.对象的属性和变量名字一样
+        // let user = {
+        //     userID:userID,
+        //     password:password
+        // }
+
+        //当属性名字与变量名字一样的时候，可以属性简写
+        let user = {
+            userID,
+            password,
+        }
+        console.log(user);
+
+
+    </script>
+</body>
+</html>
