@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol类型</title>
+</head>
+<body>
+    <script>
+        // Symbol()作用：创建symbol类型的数据
+        let id = Symbol('id');
+        console.log(id);
+        console.log(typeof id);
+        let obj = {
+            name:'12',
+        }
+        let obj1 = {
+            name:123
+        }
+        let obj2 = {...obj,...obj1}
+        console.log(obj2);
+        //symbol 类型具有唯一性
+        // 即使使用 同一条数据创建的symbol
+        // 即使使用 同一条数据
+        let id1 = Symbol('id');
+        let id2 = Symbol('id');
+        console.log(id1,id2);
+        console.log(id1===id2);
+
+        //利用symbol 类型的唯一性 解决 属性名字的冲突问题
+        // 将key 值变为 symbol 类型
+        // key值引入变量
+        let name = 'age';
+        let obj3 = {
+            // name:'132',     //name 是字符串
+            
+            [name]:1233,     //[name]是使用变量name的赋值
+            [Symbol('name')]:123,
+        }
+        let obj4 = {
+            [Symbol('name')]:789,   
+        }
+        let obj5 = {...obj3,...obj4}
+        console.log(obj5);
+
+        //隐蔽性
+        //1.for...in结构获取不到symbol类型数据
+        //2.Object.keys不能获取到symbol类型数据
+        for(let k in obj5){
+            console.log(k,obj[k]);
+        }
+        let arr = Object.keys(obj5);
+        console.log(arr);
+        // Object.getOwnPropertySymbols可以获取symbol类型数据
+        // for...of可以获取到symbol类型数据
+        let arr3 = Object.getOwnPropertySymbols(obj5);
+        console.log(arr3);
+
+        /*
+        1:有了symbol,js数据类型为7中
+        2:如何创建symbol类型
+        3:symbol类型的唯一性
+        4:symbol类型隐蔽性
+        5:symbol基本不用,应对面试的
+        */
+        
+    </script>
+</body>
+</html>
