@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1: async 是同步代码
+        // 2: await 异步的  阻塞的作用。
+        // 3：await 不执行完毕 下面代码不执行
+
+        // 难点: await 返回值
+        // 1.await 普通函数执行
+        // ----->返回值就是 函数的return
+        // 2.await async函数执行
+        // ------>返回值 async 的return 值
+        // 3.await promise 实例
+        // 关键看 promise 是怎么创建的 如果是new Promise,那么就是1, 如果是then 那么就是2
+        // ------>1,resolve 实参
+        // ------>2,then 的 return 值 
+
+
+        // 异步程序 同步化做好的方式
+        (async function(){
+            console.log('start..............');
+            let res1 = await promise1(); //情况3
+            console.log(res1);
+            let res3 = await promise2();    //情况3
+            console.log(res3);
+            // let res4 = await a();   //情况1
+            // console.log(res4);
+            // let res5 = await new Promise((resolve,reject)=>{
+            //     resolve("success5");
+            // })
+            // console.log(res5);
+            // let res6 = await new Promise((resolve,reject)=>{
+            //     resolve("success6");
+            // }).then(res=>"hahahha");
+            // console.log(res6);
+            // console.log("end----------------");
+        })()
+
+        function a(){
+            return 12;
+        }
+
+        function promise1() {
+            return new Promise((resolve, reject) => {
+                console.log('异步任务一 开始');
+                setTimeout(() => {
+                    console.log('任务一 有结果了');
+                    resolve('success one')
+                }, 1000);
+            })
+        }
+
+        function promise2() {
+            return new Promise((resolve, reject) => {
+                console.log('异步任务二 开始');
+                setTimeout(() => {
+                    console.log('任务二 有结果了');
+                    resolve('success 2')
+                }, 2000);
+            })
+        }
+
+    </script>
+</body>
+
+</html>

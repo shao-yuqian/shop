@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>点击渲染我爱你中国</button>
+    <h1></h1>
+    <script>
+
+        let btn = document.querySelector('button');
+        let text = document.querySelector("h1");
+
+        btn.addEventListener('click',async function (params) {            
+            let res1 = await ajaxA();            
+            let res2 = await ajaxB();
+            let res3 = await ajaxC();
+            res1 = JSON.parse(res1);
+            res2 = JSON.parse(res2);
+            res3 = JSON.parse(res3);
+            text.innerHTML = res1.msg+res2.msg+res3.msg;            
+        })
+
+
+
+        function ajaxA() {
+            return ajax("/a");            
+        }
+
+        function ajaxB() {
+            return ajax("/b");
+        }
+
+        function ajaxC() {
+            return ajax("/c");
+        }
+
+        function ajax(url) {
+            return new Promise((resolve, reject) => {
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', `http://192.168.1.149:3000${url}`);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState != 4) {
+                        return
+                    }
+                    if (xhr.status === 200) {
+                        resolve(xhr.responseText);
+                    } else {
+                        reject(`error ${xhr}`);
+                    }
+                }
+                xhr.send();
+            })
+        }
+    </script>
+</body>
+
+</html>

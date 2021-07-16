@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async</title>
+</head> 
+<body>
+    <script>
+        //什么是async函数
+        //为什么会有async函数
+        // 具体有哪些内容
+
+        // 这就是async
+        async function foo(){
+            return 123;
+        }
+        let res = foo();
+        console.log(res);       //Promise
+
+        res.then(data=>{
+            console.log(data);
+        });
+
+        let foo2 = async ()=>{}
+
+        let obj = {
+            foo:async function(){
+
+            },
+            foo1: async ()=>{
+
+            },
+            //function 函数：es6 中新写法 仅仅为对象中的函数
+            async foo3(){
+
+            }
+        }
+
+        //
+
+    </script>
+</body>
+</html>
