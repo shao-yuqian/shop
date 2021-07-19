@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>set 和 map 数据结构</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // Set 数据结构进行数组去重
+        const s = new Set();
+        console.log(s);
+        let arr = [2,2,5,4,5,7,7,7,5,4,];
+        arr.forEach(item=>{
+            // add() 在set 结构中添加元素
+            s.add(item);
+        })
+        console.log(s);
+        // arr1 是arr 去重后的数组
+        // let arr1 = [...s];
+        // console.log(arr1);
+
+        // 使用 for...of 遍历
+        // for(let i of s.keys()){
+        //     // i 是 s 中的元素
+        //     console.log(i);
+        // }
+
+        // Map 
+        // js 中key 只能是字符串，将来在使用的时候有限制
+        // 为了突破限制有了map 数据结构
+        // key 不是单一的字符串
+        const data = {};
+        const element = document.querySelector("#app");
+        data[element] = 'metadata';
+        console.log(data);  //[object HTMLDivElement]: "metadata"
+
+        const m = new Map();
+        console.log(m);
+        m.set(element,'metadata');
+        console.log(m);
+
+        for(let k of m.keys()){
+            console.log(k);
+        }
+
+        
+        
+        
+    </script>
+</body>
+</html>
